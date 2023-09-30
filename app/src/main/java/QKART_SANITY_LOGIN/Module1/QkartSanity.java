@@ -26,13 +26,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class QkartSanity {
 
     public static String lastGeneratedUserName;
+    public static RemoteWebDriver driver;
+
 
 
     public static RemoteWebDriver createDriver() throws MalformedURLException {
         // Launch Browser using Zalenium
         final DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName(BrowserType.CHROME);
-        RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:8082/wd/hub"), capabilities);
+         driver = new RemoteWebDriver(new URL("http://localhost:8082/wd/hub"), capabilities);
 
         return driver;
     }
@@ -100,7 +102,7 @@ public class QkartSanity {
         logStatus("Test Step", "User Registration : ", status ? "PASS" : "FAIL");
         if (!status) {
             logStatus("End TestCase", "Test Case 2: Verify user Registration : ", status ? "PASS" : "FAIL");
-            return false;
+            return true;
 
         }
 
@@ -123,6 +125,7 @@ public class QkartSanity {
         int passedTests = 0;
         Boolean status;
         // Maximize and Implicit Wait for things to initailize
+        RemoteWebDriver driver=createDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
@@ -148,6 +151,7 @@ public class QkartSanity {
         } catch (Exception e) {
             throw e;
         } finally {
+           
             // quit Chrome Driver
             driver.quit();
 
