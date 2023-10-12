@@ -39,6 +39,7 @@ public class Register {
         else
              test_data_username = Username ;
              //+ "_" + String.valueOf(timestamp.getTime());
+       // test_data_username = Username;
 
         // Type the generated username in the username field
         username_txt_box.sendKeys(test_data_username);
@@ -49,6 +50,7 @@ public class Register {
 
         // Enter the Password value
         password_txt_box.sendKeys("abc@123");
+        password_txt_box.sendKeys(test_data_password);
 
         // Find the Confirm password text box
         WebElement confirm_password_txt_box;
@@ -56,6 +58,7 @@ public class Register {
 
         // Enter the Confirm Password Value
         confirm_password_txt_box.sendKeys("abc@123");
+        confirm_password_txt_box.sendKeys(test_data_password);
 
         // Find the register now button
         WebElement register_now_button = this.driver.findElement(By.className("button"));

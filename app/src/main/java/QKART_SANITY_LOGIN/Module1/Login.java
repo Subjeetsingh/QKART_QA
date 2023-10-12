@@ -39,6 +39,7 @@ public class Login {
 
         // Enter the password
         password_txt_box.sendKeys("abc@123");
+        password_txt_box.sendKeys(Password);
 
         // Find the Login Button
         WebElement login_button = driver.findElement(By.className("button"));
@@ -57,6 +58,7 @@ public class Login {
             // Find the username label (present on the top right of the page)
             WebElement username_label;
              username_label = this.driver.findElement(By.className("username-text"));
+            // username_label = this.driver.findElement(By.className("username-text"));
             return username_label.getText().equals(Username);
         } catch (Exception e) {
             return false;
