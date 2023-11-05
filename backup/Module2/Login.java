@@ -38,7 +38,10 @@ public class Login {
         WebElement password_txt_box = this.driver.findElement(By.id("password"));
 
         // Enter the password
+<<<<<<< HEAD
         password_txt_box.sendKeys("abc@123");
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         password_txt_box.sendKeys(Password);
 
         // Find the Login Button
@@ -47,6 +50,10 @@ public class Login {
         // Click the login Button
         login_button.click();
 
+<<<<<<< HEAD
+=======
+        // SLEEP_STMT_13: Wait for Login to Complete
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         // Wait for Login action to complete
         Thread.sleep(5000);
 
@@ -57,8 +64,12 @@ public class Login {
         try {
             // Find the username label (present on the top right of the page)
             WebElement username_label;
+<<<<<<< HEAD
              username_label = this.driver.findElement(By.className("username-text"));
             // username_label = this.driver.findElement(By.className("username-text"));
+=======
+            username_label = this.driver.findElement(By.className("username-text"));
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return username_label.getText().equals(Username);
         } catch (Exception e) {
             return false;

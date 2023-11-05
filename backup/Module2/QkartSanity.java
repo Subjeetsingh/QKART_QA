@@ -26,15 +26,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class QkartSanity {
 
     public static String lastGeneratedUserName;
+<<<<<<< HEAD
     public static RemoteWebDriver driver;
 
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
 
 
     public static RemoteWebDriver createDriver() throws MalformedURLException {
         // Launch Browser using Zalenium
         final DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName(BrowserType.CHROME);
+<<<<<<< HEAD
          driver = new RemoteWebDriver(new URL("http://localhost:8082/wd/hub"), capabilities);
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:8082/wd/hub"), capabilities);
 
         return driver;
@@ -46,6 +52,20 @@ public class QkartSanity {
                 message, status));
     }
 
+<<<<<<< HEAD
+=======
+    public static void takeScreenshot(WebDriver driver, String screenshotType, String description) {
+        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION - Implement method using below steps
+        /*
+         * 1. Check if the folder "/screenshots" exists, create if it doesn't
+         * 2. Generate a unique string using the timestamp
+         * 3. Capture screenshot
+         * 4. Save the screenshot inside the "/screenshots" folder using the following
+         * naming convention: screenshot_<Timestamp>_<ScreenshotType>_<Description>.png
+         * eg: screenshot_2022-03-05T06:59:46.015489_StartTestcase_Testcase01.png
+         */
+    }
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
 
     /*
      * Testcase01: Verify the functionality of Login button on the Home page
@@ -132,6 +152,10 @@ public class QkartSanity {
         Home homePage = new Home(driver);
         homePage.navigateToHome();
 
+<<<<<<< HEAD
+=======
+        // SLEEP_STMT_01 : Wait for Page to Load
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         Thread.sleep(5000);
 
         // Search for the "yonex" product
@@ -164,6 +188,10 @@ public class QkartSanity {
         }
 
         logStatus("Step Success", "Successfully validated the search results ", "PASS");
+<<<<<<< HEAD
+=======
+        // SLEEP_STMT_02
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         Thread.sleep(2000);
 
         // Search for product
@@ -201,6 +229,10 @@ public class QkartSanity {
         Home homePage = new Home(driver);
         homePage.navigateToHome();
 
+<<<<<<< HEAD
+=======
+        // SLEEP_STMT_03 : Wait for page to load
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         Thread.sleep(5000);
 
         // Search for product and get card content element of search results
@@ -304,6 +336,10 @@ public class QkartSanity {
 
         // Place the order
         checkoutPage.placeOrder();
+<<<<<<< HEAD
+=======
+        // SLEEP_STMT_04: Wait for place order to succeed and navigate to Thanks page
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         Thread.sleep(3000);
 
         // Check if placing order redirected to the Thansk page
@@ -330,6 +366,7 @@ public class QkartSanity {
         Register registration = new Register(driver);
         Login login = new Login(driver);
 
+<<<<<<< HEAD
         // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 06: MILESTONE 5
 
         // Go to the Register page
@@ -371,6 +408,17 @@ public class QkartSanity {
         homePage.changeProductQuantityinCart("Yarine Floor Lamp", 0);
 
         // update watch quantity again to 1
+=======
+
+
+
+
+
+        homePage.changeProductQuantityinCart("Xtend Smart Watch", 2);
+
+        homePage.changeProductQuantityinCart("Yarine Floor Lamp", 0);
+
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         homePage.changeProductQuantityinCart("Xtend Smart Watch", 1);
 
         homePage.clickCheckout();
@@ -448,10 +496,39 @@ public class QkartSanity {
         return status;
     }
 
+<<<<<<< HEAD
 
     public static void main(String[] args) throws InterruptedException, MalformedURLException {
         RemoteWebDriver driver = createDriver();
 
+=======
+    public static Boolean TestCase08(RemoteWebDriver driver) throws InterruptedException {
+        Boolean status = false;
+
+        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION -
+        return status;
+    }
+
+    public static Boolean TestCase9(RemoteWebDriver driver) throws InterruptedException {
+        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION -
+        Boolean status = false;
+        return status;
+    }
+
+    public static Boolean TestCase10(RemoteWebDriver driver) throws InterruptedException {
+        Boolean status = false;
+        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION -
+        return status;
+    }
+
+    public static Boolean TestCase11(RemoteWebDriver driver) throws InterruptedException {
+        Boolean status = false;
+        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION -
+        return status;
+    }
+
+    public static void main(String[] args) throws InterruptedException, MalformedURLException {
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         int totalTests = 0;
         int passedTests = 0;
         Boolean status;
@@ -469,7 +546,11 @@ public class QkartSanity {
 
             System.out.println("");
 
+<<<<<<< HEAD
         // //     // Execute Test Case 2
+=======
+            // Execute Test Case 2
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             totalTests += 1;
             status = TestCase02(driver);
             if (status) {
@@ -477,6 +558,7 @@ public class QkartSanity {
             }
 
             System.out.println("");
+<<<<<<< HEAD
             //Execute Test Case 3
             totalTests += 1;
             status = TestCase03(driver);
@@ -523,6 +605,89 @@ public class QkartSanity {
             System.out.println("");
 
 
+=======
+            // Execute Test Case 3
+            // totalTests += 1;
+            // status = TestCase03(driver);
+            // if (status) {
+            // passedTests += 1;
+            // }
+
+            // System.out.println("");
+
+            // Execute Test Case 4
+            // totalTests += 1;
+            // status = TestCase04(driver);
+            // if (status) {
+            // passedTests += 1;
+            // }
+
+            // System.out.println("");
+
+            // Execute Test Case 5
+            // totalTests += 1;
+            // status = TestCase05(driver);
+            // if (status) {
+            // passedTests += 1;
+            // }
+
+            // System.out.println("");
+
+            // Execute Test Case 6
+            // totalTests += 1;
+            // status = TestCase06(driver);
+            // if (status) {
+            // passedTests += 1;
+            // }
+
+            // System.out.println("");
+
+            // Execute Test Case 7
+            // totalTests += 1;
+            // status = TestCase07(driver);
+            // if (status) {
+            // passedTests += 1;
+            // }
+
+            // System.out.println("");
+
+
+            // Execute Test Case 8
+            // totalTests += 1;
+            // status = TestCase08(driver);
+            // if (status) {
+            // passedTests += 1;
+            // }
+
+            // System.out.println("");
+
+            // Execute Test Case 9
+            // totalTests += 1;
+            // status = TestCase09(driver);
+            // if (status) {
+            // passedTests += 1;
+            // }
+
+            // System.out.println("");
+
+            // Execute Test Case 10
+            // totalTests += 1;
+            // status = TestCase10(driver);
+            // if (status) {
+            // passedTests += 1;
+            // }
+
+            // System.out.println("");
+
+            // Execute Test Case 11
+            // totalTests += 1;
+            // status = TestCase11(driver);
+            // if (status) {
+            // passedTests += 1;
+            // }
+
+            // System.out.println("");
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         } catch (Exception e) {
             throw e;
         } finally {

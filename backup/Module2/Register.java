@@ -37,9 +37,13 @@ public class Register {
             // Concatenate the timestamp to string to form unique timestamp
             test_data_username = Username + "_" + String.valueOf(timestamp.getTime());
         else
+<<<<<<< HEAD
              test_data_username = Username ;
              //+ "_" + String.valueOf(timestamp.getTime());
        // test_data_username = Username;
+=======
+        test_data_username = Username;
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
 
         // Type the generated username in the username field
         username_txt_box.sendKeys(test_data_username);
@@ -49,7 +53,10 @@ public class Register {
         String test_data_password = Password;
 
         // Enter the Password value
+<<<<<<< HEAD
         password_txt_box.sendKeys("abc@123");
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         password_txt_box.sendKeys(test_data_password);
 
         // Find the Confirm password text box
@@ -57,7 +64,10 @@ public class Register {
         confirm_password_txt_box = this.driver.findElement(By.id("confirmPassword"));
 
         // Enter the Confirm Password Value
+<<<<<<< HEAD
         confirm_password_txt_box.sendKeys("abc@123");
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         confirm_password_txt_box.sendKeys(test_data_password);
 
         // Find the register now button
@@ -68,6 +78,10 @@ public class Register {
         // Wait for registration to complete
         Thread.sleep(3000);
 
+<<<<<<< HEAD
+=======
+        // SLEEP_STMT_06: Wait for new user to get created in the backend
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
 
         this.lastGeneratedUsername = test_data_username;
 

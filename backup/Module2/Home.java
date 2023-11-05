@@ -2,15 +2,22 @@ package QKART_SANITY_LOGIN.Module1;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.concurrent.TimeoutException;
+=======
+
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
 public class Home {
     RemoteWebDriver driver;
     String url = "https://crio-qkart-frontend-qa.vercel.app";
@@ -31,9 +38,15 @@ public class Home {
             WebElement logout_button = driver.findElement(By.className("MuiButton-text"));
             logout_button.click();
 
+<<<<<<< HEAD
             WebDriverWait wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.invisibilityOfElementWithText(By.className("css-1urhf6j"),
                     "Logout"));
+=======
+            // SLEEP_STMT_10: Wait for Logout to complete
+            // Wait for Logout to Complete
+            Thread.sleep(3000);
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
 
             return true;
         } catch (Exception e) {
@@ -43,6 +56,7 @@ public class Home {
     }
 
     /*
+<<<<<<< HEAD
      * Returns Boolean if searching for the given product name occurs without any errors
      */
     public Boolean searchForProduct(String product){
@@ -69,22 +83,40 @@ public class Home {
         // //     return true;
         }
         catch (Exception e) {
+=======
+     * Returns Boolean if searching for the given product name occurs without any
+     * errors
+     */
+    public Boolean searchForProduct(String product) {
+        try {
+            return true;
+        } catch (Exception e) {
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             System.out.println("Error while searching for a product: " + e.getMessage());
             return false;
         }
     }
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
 
     /*
      * Returns Array of Web Elements that are search results and return the same
      */
     public List<WebElement> getSearchResults() {
+<<<<<<< HEAD
         List<WebElement> searchResults = new ArrayList<WebElement>() {};
         try {
             // Find all webelements corresponding to the card content section of each of
             // search results
             searchResults = driver.findElementsByClassName("css-1qw96cp");
+=======
+        List<WebElement> searchResults = new ArrayList<WebElement>() {
+        };
+        try {
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return searchResults;
         } catch (Exception e) {
             System.out.println("There were no search results: " + e.getMessage());
@@ -99,11 +131,14 @@ public class Home {
     public Boolean isNoResultFound() {
         Boolean status = false;
         try {
+<<<<<<< HEAD
             // Check the presence of "No products found" text in the web page. Assign status
             // = true if the element is displayed else set status = false
             status = driver
                     .findElementByXPath("//*[@id=\"root\"]/div/div/div[3]/div[1]/div[2]/div/h4")
                     .isDisplayed();
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return status;
         } catch (Exception e) {
             return status;
@@ -116,13 +151,19 @@ public class Home {
     public Boolean addProductToCart(String productName) {
         try {
             /*
+<<<<<<< HEAD
              * Iterate through each product on the page to find the WebElement corresponding to the
              * matching productName
+=======
+             * Iterate through each product on the page to find the WebElement corresponding
+             * to the matching productName
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
              * 
              * Click on the "ADD TO CART" button for that element
              * 
              * Return true if these operations succeeds
              */
+<<<<<<< HEAD
             List<WebElement> gridContent = driver.findElementsByClassName("css-sycj1h");
             for (WebElement cell : gridContent) {
                 if (productName.contains(cell.findElement(By.className("css-yg30e6")).getText())) {
@@ -139,6 +180,9 @@ public class Home {
             // successfully
         
             System.out.println("Unable to find the given product: " + productName);
+=======
+            System.out.println("Unable to find the given product");
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return false;
         } catch (Exception e) {
             System.out.println("Exception while performing add to cart: " + e.getMessage());
@@ -152,11 +196,14 @@ public class Home {
     public Boolean clickCheckout() {
         Boolean status = false;
         try {
+<<<<<<< HEAD
             // Find and click on the the Checkout button
             WebElement checkoutBtn = driver.findElement(By.className("css-177pwqq"));
             checkoutBtn.click();
 
             status = true;
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return status;
         } catch (Exception e) {
             System.out.println("Exception while clicking on Checkout: " + e.getMessage());
@@ -165,11 +212,17 @@ public class Home {
     }
 
     /*
+<<<<<<< HEAD
      * Return Boolean denoting the status of change quantity of product in cart operation
+=======
+     * Return Boolean denoting the status of change quantity of product in cart
+     * operation
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
      */
     public Boolean changeProductQuantityinCart(String productName, int quantity) {
         try {
 
+<<<<<<< HEAD
             // Find the item on the cart with the matching productName
 
             // Increment or decrement the quantity of the matching product until the current
@@ -213,12 +266,20 @@ public class Home {
                     return true;
                 }
             }
+=======
+
+
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
 
             return false;
         } catch (Exception e) {
             if (quantity == 0)
                 return true;
+<<<<<<< HEAD
             System.out.println(("exception occurred when updating cart"));
+=======
+            System.out.println("exception occurred when updating cart: " + e.getMessage());
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return false;
         }
     }
@@ -226,6 +287,7 @@ public class Home {
     /*
      * Return Boolean denoting if the cart contains items as expected
      */
+<<<<<<< HEAD
     // TODO: CRIO_TASK_MODULE_XPATH - M1_1 Update locators to use Xpath
     public Boolean verifyCartContents(List<String> expectedCartContents) {
         try {
@@ -233,6 +295,10 @@ public class Home {
 
             // Iterate through expectedCartContents and check if item with matching product
             // name is present in the cart
+=======
+    public Boolean verifyCartContents(List<String> expectedCartContents) {
+        try {
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             WebElement cartParent = driver.findElement(By.className("cart"));
             List<WebElement> cartContents = cartParent.findElements(By.className("css-zgtx0t"));
 
@@ -243,8 +309,12 @@ public class Home {
             }
 
             for (String expected : expectedCartContents) {
+<<<<<<< HEAD
                 // To trim as getText() trims cart item title
                 if (!actualCartContents.contains(expected.trim())) {
+=======
+                if (!actualCartContents.contains(expected)) {
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
                     return false;
                 }
             }
@@ -256,6 +326,9 @@ public class Home {
             return false;
         }
     }
+<<<<<<< HEAD
 
     public void performLogout() {}
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
 }

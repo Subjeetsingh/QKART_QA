@@ -31,6 +31,7 @@ public class Checkout {
              * Click on the "Add new address" button, enter the addressString in the address
              * text box and click on the "ADD" button to save the address
              */
+<<<<<<< HEAD
             WebElement addNewAddressButton = driver.findElement(By.className("css-rfvjbl"));
             addNewAddressButton.click();
 
@@ -50,6 +51,8 @@ public class Checkout {
                     return true;
                 }
             }
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return false;
         } catch (Exception e) {
             System.out.println("Exception occurred while entering address: " + e.getMessage());
@@ -67,6 +70,7 @@ public class Checkout {
              * Iterate through all the address boxes to find the address box with matching
              * text, addressToSelect and click on it
              */
+<<<<<<< HEAD
             WebElement parentBox = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div[1]"));
             List<WebElement> allBoxes = parentBox.findElements(By.className("not-selected"));
 
@@ -77,6 +81,8 @@ public class Checkout {
                     return true;
                 }
             }
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             System.out.println("Unable to find the given address");
             return false;
         } catch (Exception e) {
@@ -89,6 +95,7 @@ public class Checkout {
     /*
      * Return Boolean denoting the status of place order action
      */
+<<<<<<< HEAD
     // TODO: CRIO_TASK_MODULE_XPATH - M1_2 Update locators to use Xpath
     public Boolean placeOrder() {
         try {
@@ -100,6 +107,10 @@ public class Checkout {
                     return true;
                 }
             }
+=======
+    public Boolean placeOrder() {
+        try {
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return false;
 
         } catch (Exception e) {
@@ -113,16 +124,23 @@ public class Checkout {
      */
     public Boolean verifyInsufficientBalanceMessage() {
         try {
+<<<<<<< HEAD
             WebElement alertMessage = driver.findElement(By.id("notistack-snackbar"));
             if (alertMessage.isDisplayed()) {
                 if (alertMessage.getText().equals("You do not have enough balance in your wallet for this purchase")) {
                     return true;
                 }
             }
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return false;
         } catch (Exception e) {
             System.out.println("Exception while verifying insufficient balance message: " + e.getMessage());
             return false;
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b

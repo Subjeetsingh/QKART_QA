@@ -23,6 +23,7 @@ public class SearchResult {
      */
     public String getTitleofResult() {
         String titleOfSearchResult = "";
+<<<<<<< HEAD
         // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 03: MILESTONE 1
         // Find the element containing the title (product name) of the search result and
 
@@ -32,6 +33,9 @@ public class SearchResult {
         
         // assign the extract title text to titleOfSearchResult
        
+=======
+        return titleOfSearchResult;
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
     }
 
     /*
@@ -40,12 +44,15 @@ public class SearchResult {
     public Boolean openSizechart() {
         try {
 
+<<<<<<< HEAD
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
             // Find the link of size chart in the parentElement and click on it
             WebElement element = parentElement.findElement(By.xpath("//button[text()='Size chart']"));
             element.click();
 
             Thread.sleep(5000);
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return true;
         } catch (Exception e) {
             System.out.println("Exception while opening Size chart: " + e.getMessage());
@@ -61,7 +68,10 @@ public class SearchResult {
             Thread.sleep(2000);
             Actions action = new Actions(driver);
 
+<<<<<<< HEAD
             // Clicking on "ESC" key closes the size chart modal
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             action.sendKeys(Keys.ESCAPE);
             action.perform();
             Thread.sleep(2000);
@@ -78,18 +88,25 @@ public class SearchResult {
     public Boolean verifySizeChartExists() {
         Boolean status = false;
         try {
+<<<<<<< HEAD
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             /*
              * Check if the size chart element exists. If it exists, check if the text of
              * the element is "SIZE CHART". If the text "SIZE CHART" matches for the
              * element, set status = true , else set to false
              */
+<<<<<<< HEAD
 
             WebElement element = parentElement.findElement(By.tagName("button"));
             status = element.getText().equals("SIZE CHART");
 
             return status;
             
+=======
+            return status;
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         } catch (Exception e) {
             return status;
         }
@@ -103,7 +120,10 @@ public class SearchResult {
             WebDriver driver) {
         Boolean status = true;
         try {
+<<<<<<< HEAD
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             /*
              * Locate the table element when the size chart modal is open
              * 
@@ -113,6 +133,7 @@ public class SearchResult {
              * Validate that the contents of expectedTableBody are present in the table body
              * in the same order
              */
+<<<<<<< HEAD
             WebElement sizeChartParent = driver.findElement(By.className("MuiDialog-paperScrollPaper"));
             WebElement tableElement = sizeChartParent.findElement(By.tagName("table"));
             List<WebElement> tableHeader = tableElement.findElement(By.tagName("thead")).findElements(By.tagName("th"));
@@ -147,6 +168,8 @@ public class SearchResult {
                     }
                 }
             }
+=======
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
             return status;
 
         } catch (Exception e) {
@@ -161,11 +184,15 @@ public class SearchResult {
     public Boolean verifyExistenceofSizeDropdown(WebDriver driver) {
         Boolean status = false;
         try {
+<<<<<<< HEAD
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
             // If the size dropdown exists and is displayed return true, else return false
             WebElement element = driver.findElement(By.className("css-13sljp9"));
             status = element.isDisplayed();
             return status; 
+=======
+            return status;
+>>>>>>> 6998c493725835ed027289ae504fb065a1068c6b
         } catch (Exception e) {
             return status;
         }
