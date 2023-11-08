@@ -46,7 +46,7 @@ public class Checkout {
                     wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(String.format(
                             "//*[@class='MuiTypography-root MuiTypography-body1 css-yg30e6' and text()='%s']",
                             addresString))));
-                    // Thread.sleep(3000);
+                    Thread.sleep(3000);
                     return true;
                 }
             }
@@ -56,7 +56,7 @@ public class Checkout {
             return false;
 
         }
-        }
+    }
 
     /*
      * Return Boolean denoting the status of selecting an available address

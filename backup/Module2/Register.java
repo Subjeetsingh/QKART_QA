@@ -18,11 +18,9 @@ public class Register {
         this.driver = driver;
     }
 
-    public void navigateToRegisterPage() throws InterruptedException {
+    public void navigateToRegisterPage() {
         if (!driver.getCurrentUrl().equals(this.url)) {
             driver.get(this.url);
-
-            Thread.sleep(2000);
         }
     }
 
@@ -39,44 +37,37 @@ public class Register {
             // Concatenate the timestamp to string to form unique timestamp
             test_data_username = Username + "_" + String.valueOf(timestamp.getTime());
         else
-        test_data_username = Username;
+             test_data_username = Username ;
+             //+ "_" + String.valueOf(timestamp.getTime());
+       // test_data_username = Username;
 
         // Type the generated username in the username field
         username_txt_box.sendKeys(test_data_username);
-        Thread.sleep(2000);
 
         // Find the password Text Box
         WebElement password_txt_box = this.driver.findElement(By.id("password"));
         String test_data_password = Password;
 
         // Enter the Password value
+        password_txt_box.sendKeys("abc@123");
         password_txt_box.sendKeys(test_data_password);
-        Thread.sleep(2000);
 
         // Find the Confirm password text box
         WebElement confirm_password_txt_box;
         confirm_password_txt_box = this.driver.findElement(By.id("confirmPassword"));
 
         // Enter the Confirm Password Value
+        confirm_password_txt_box.sendKeys("abc@123");
         confirm_password_txt_box.sendKeys(test_data_password);
-        Thread.sleep(2000);
 
         // Find the register now button
-        WebElement register_now_button = this.driver.findElement(By.xpath("//button[text() = 'Register Now']"));
+        WebElement register_now_button = this.driver.findElement(By.className("button"));
 
         // Click the register now button
         register_now_button.click();
-        // Thread.sleep(3000);
+        // Wait for registration to complete
+        Thread.sleep(3000);
 
-        try 
-        {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            wait.until(ExpectedConditions.or(ExpectedConditions.urlToBe("https://crio-qkart-frontend-qa.vercel.app/login")));
-        }
-        
-        catch (TimeoutException e) {
-            return false;
-        }
 
         this.lastGeneratedUsername = test_data_username;
 

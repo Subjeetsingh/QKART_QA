@@ -26,7 +26,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class QkartSanity {
 
     public static String lastGeneratedUserName;
-    // public static RemoteWebDriver driver;
+    public static RemoteWebDriver driver;
 
 
 
@@ -34,7 +34,7 @@ public class QkartSanity {
         // Launch Browser using Zalenium
         final DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName(BrowserType.CHROME);
-        //  driver = new RemoteWebDriver(new URL("http://localhost:8082/wd/hub"), capabilities);
+         driver = new RemoteWebDriver(new URL("http://localhost:8082/wd/hub"), capabilities);
         RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:8082/wd/hub"), capabilities);
 
         return driver;
@@ -46,42 +46,12 @@ public class QkartSanity {
                 message, status));
     }
 
-    public static void takeScreenshot(WebDriver driver, String screenshotType, String description) {
-        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION - Implement method using below steps
-        /*
-         * 1. Check if the folder "/screenshots" exists, create if it doesn't
-         * 2. Generate a unique string using the timestamp
-         * 3. Capture screenshot
-         * 4. Save the screenshot inside the "/screenshots" folder using the following
-         * naming convention: screenshot_<Timestamp>_<ScreenshotType>_<Description>.png
-         * eg: screenshot_2022-03-05T06:59:46.015489_StartTestcase_Testcase01.png
-         */
-        try{
-         File theDir= new File("/screenshots");
-            if(!theDir.exists()){
-                theDir.mkdirs();
-            }
-
-            String timeStamp=String.valueOf(java.time.LocalDateTime.now());
-            String fileName=String.format("screenshot_%s_%s_%s.png", timeStamp, screenshotType,description);
-            TakesScreenshot scrShot=((TakesScreenshot) driver);
-            File srcFile=scrShot.getScreenshotAs(OutputType.FILE);
-            File destFile=new File("screenshots/" + fileName);
-            FileUtils.copyFile(srcFile, destFile);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-
-        }
-    
 
     /*
      * Testcase01: Verify the functionality of Login button on the Home page
      */
     public static Boolean TestCase01(RemoteWebDriver driver) throws InterruptedException {
         Boolean status;
-        takeScreenshot(driver, "StartTest", "TestCase01");
         logStatus("Start TestCase", "Test Case 1: Verify User Registration", "DONE");
 
         // Visit the Registration page and register a new user
@@ -92,10 +62,7 @@ public class QkartSanity {
             logStatus("TestCase 1", "Test Case Pass. User Registration Pass", "FAIL");
             logStatus("End TestCase", "Test Case 1: Verify user Registration : ", status ? "PASS" : "FAIL");
 
-
             // Return False as the test case Fails
-            takeScreenshot(driver, "TestCaseFailed", "TestCase01");
-
             return false;
         } else {
             logStatus("TestCase 1", "Test Case Pass. User Registration Pass", "PASS");
@@ -111,8 +78,6 @@ public class QkartSanity {
         logStatus("Test Step", "User Perform Login: ", status ? "PASS" : "FAIL");
         if (!status) {
             logStatus("End TestCase", "Test Case 1: Verify user Registration : ", status ? "PASS" : "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase01");
-
             return false;
         }
 
@@ -120,8 +85,6 @@ public class QkartSanity {
         Home home = new Home(driver);
         status = home.PerformLogout();
         logStatus("End TestCase", "Test Case 1: Verify user Registration : ", status ? "PASS" : "FAIL");
-        takeScreenshot(driver, "EndTestCase", "TestCase01");
-
 
         return status;
     }
@@ -131,8 +94,6 @@ public class QkartSanity {
      */
     public static Boolean TestCase02(RemoteWebDriver driver) throws InterruptedException {
         Boolean status;
-        takeScreenshot(driver, "StartTestCase", "TestCase02");
-
         logStatus("Start Testcase", "Test Case 2: Verify User Registration with an existing username ", "DONE");
 
         // Visit the Registration page and register a new user
@@ -142,8 +103,6 @@ public class QkartSanity {
         logStatus("Test Step", "User Registration : ", status ? "PASS" : "FAIL");
         if (!status) {
             logStatus("End TestCase", "Test Case 2: Verify user Registration : ", status ? "PASS" : "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase02");
-
             return false;
 
         }
@@ -159,8 +118,6 @@ public class QkartSanity {
         // If status is true, then registration succeeded, else registration has
         // failed. In this case registration failure means Success
         logStatus("End TestCase", "Test Case 2: Verify user Registration : ", status ? "FAIL" : "PASS");
-        takeScreenshot(driver, "EndTestCase", "TestCase02");
-
         return !status;
     }
 
@@ -170,22 +127,17 @@ public class QkartSanity {
     public static Boolean TestCase03(RemoteWebDriver driver) throws InterruptedException {
         logStatus("TestCase 3", "Start test case : Verify functionality of search box ", "DONE");
         boolean status;
-        takeScreenshot(driver, "StartTestCase", "TestCase03");
-
 
         // Visit the home page
         Home homePage = new Home(driver);
         homePage.navigateToHome();
 
-        // SLEEP_STMT_01 : Wait for Page to Load
-       // Thread.sleep(5000);
+        Thread.sleep(5000);
 
         // Search for the "yonex" product
         status = homePage.searchForProduct("yonex");
         if (!status) {
             logStatus("TestCase 3", "Test Case Failure. Unable to search for given product", "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase03");
-
             return false;
         }
 
@@ -195,8 +147,6 @@ public class QkartSanity {
         // Verify the search results are available
         if (searchResults.size() == 0) {
             logStatus("TestCase 3", "Test Case Failure. There were no results for the given search string", "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase03");
-
             return false;
         }
 
@@ -209,22 +159,17 @@ public class QkartSanity {
             if (!elementText.toUpperCase().contains("YONEX")) {
                 logStatus("TestCase 3", "Test Case Failure. Test Results contains un-expected values: " + elementText,
                         "FAIL");
-                        takeScreenshot(driver, "TestCaseFailed", "TestCase03");
-
                 return false;
             }
         }
 
         logStatus("Step Success", "Successfully validated the search results ", "PASS");
-        // SLEEP_STMT_02
-        //Thread.sleep(2000);
+        Thread.sleep(2000);
 
         // Search for product
         status = homePage.searchForProduct("Gesundheit");
         if (!status) {
             logStatus("TestCase 3", "Test Case Failure. Unable to search for given product", "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase03");
-
             return false;
         }
 
@@ -236,12 +181,8 @@ public class QkartSanity {
             }
             logStatus("TestCase 3", "Test Case PASS. Verified that no search results were found for the given text",
                     "PASS");
-                    takeScreenshot(driver, "EndTestCase", "TestCase03");
-
         } else {
             logStatus("TestCase 3", "Test Case Fail. Expected: no results , actual: Results were available", "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase03");
-
             return false;
         }
 
@@ -255,15 +196,12 @@ public class QkartSanity {
     public static Boolean TestCase04(RemoteWebDriver driver) throws InterruptedException {
         logStatus("TestCase 4", "Start test case : Verify the presence of size Chart", "DONE");
         boolean status = false;
-        takeScreenshot(driver, "StartTestCasee", "TestCase04");
-
 
         // Visit home page
         Home homePage = new Home(driver);
         homePage.navigateToHome();
 
-        // SLEEP_STMT_03 : Wait for page to load
-        //Thread.sleep(5000);
+        Thread.sleep(5000);
 
         // Search for product and get card content element of search results
         status = homePage.searchForProduct("Running Shoes");
@@ -295,8 +233,6 @@ public class QkartSanity {
                         logStatus("Step Success", "Successfully validated contents of Size Chart Link", "PASS");
                     } else {
                         logStatus("Step Failure", "Failure while validating contents of Size Chart Link", "FAIL");
-                        takeScreenshot(driver, "TestCaseFailed", "TestCase04");
-
                     }
 
                     // Close the size chart modal
@@ -304,21 +240,15 @@ public class QkartSanity {
 
                 } else {
                     logStatus("TestCase 4", "Test Case Fail. Failure to open Size Chart", "FAIL");
-                    takeScreenshot(driver, "TestCaseFailed", "TestCase04");
-
                     return false;
                 }
 
             } else {
                 logStatus("TestCase 4", "Test Case Fail. Size Chart Link does not exist", "FAIL");
-                takeScreenshot(driver, "TestCaseFailed", "TestCase04");
-
                 return false;
             }
         }
         logStatus("TestCase 4", "Test Case PASS. Validated Size Chart Details", "PASS");
-        takeScreenshot(driver, "EndTestCase", "TestCase04");
-
         return status;
     }
 
@@ -328,8 +258,6 @@ public class QkartSanity {
      */
     public static Boolean TestCase05(RemoteWebDriver driver) throws InterruptedException {
         Boolean status;
-        takeScreenshot(driver, "StartTestCase", "TestCase05");
-
         logStatus("Start TestCase", "Test Case 5: Verify Happy Flow of buying products", "DONE");
 
         // Go to the Register page
@@ -340,8 +268,6 @@ public class QkartSanity {
         status = registration.registerUser("testUser", "abc@123", true);
         if (!status) {
             logStatus("TestCase 5", "Test Case Failure. Happy Flow Test Failed", "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase05");
-
         }
 
         // Save the username of the newly registered user
@@ -355,10 +281,7 @@ public class QkartSanity {
         status = login.PerformLogin(lastGeneratedUserName, "abc@123");
         if (!status) {
             logStatus("Step Failure", "User Perform Login Failed", status ? "PASS" : "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase05");
-
             logStatus("End TestCase", "Test Case 5: Happy Flow Test Failed : ", status ? "PASS" : "FAIL");
-
         }
 
         // Go to the home page
@@ -381,11 +304,7 @@ public class QkartSanity {
 
         // Place the order
         checkoutPage.placeOrder();
-        // SLEEP_STMT_04: Wait for place order to succeed and navigate to Thanks page
-        // Thread.sleep(3000);
-
-        WebDriverWait wait =new WebDriverWait(driver, 30 );
-        wait.until(ExpectedConditions.urlToBe("https://crio-qkart-frontend-qa.vercel.app/thanks"));
+        Thread.sleep(3000);
 
         // Check if placing order redirected to the Thansk page
         status = driver.getCurrentUrl().endsWith("/thanks");
@@ -398,8 +317,6 @@ public class QkartSanity {
         homePage.PerformLogout();
 
         logStatus("End TestCase", "Test Case 5: Happy Flow Test Completed : ", status ? "PASS" : "FAIL");
-        takeScreenshot(driver, "EndTestCase", "TestCase05");
-
         return status;
     }
 
@@ -408,8 +325,6 @@ public class QkartSanity {
      */
     public static Boolean TestCase06(RemoteWebDriver driver) throws InterruptedException {
         Boolean status;
-        takeScreenshot(driver, "StartTestCase", "TestCase06");
-
         logStatus("Start TestCase", "Test Case 6: Verify that cart can be edited", "DONE");
         Home homePage = new Home(driver);
         Register registration = new Register(driver);
@@ -422,11 +337,9 @@ public class QkartSanity {
         registration.navigateToRegisterPage();
 
         // Register a new user
-        status = registration.registerUser(lastGeneratedUserName, "abc@123", true);
+        status = registration.registerUser("testUser", "abc@123", true);
         if (!status) {
             logStatus("TestCase 6", "Test Case Failure. Happy Flow Test Failed", "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase06");
-
         }
 
         // Save the username of the newly registered user
@@ -439,8 +352,6 @@ public class QkartSanity {
         status = login.PerformLogin(lastGeneratedUserName, "abc@123");
         if (!status) {
             logStatus("Step Failure", "User Perform Login Failed", status ? "PASS" : "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase06");
-
             logStatus("End TestCase", "Test Case 5: Happy Flow Test Failed : ", status ? "PASS" : "FAIL");
         }
 
@@ -478,27 +389,21 @@ public class QkartSanity {
         homePage.PerformLogout();
 
         logStatus("End TestCase", "Test Case 6: Verify that cart can be edited: ", status ? "PASS" : "FAIL");
-        takeScreenshot(driver, "EndTestCase", "TestCase06");
-
         return status;
     }
 
 
     public static Boolean TestCase07(RemoteWebDriver driver) throws InterruptedException {
         Boolean status;
-        takeScreenshot(driver, "StartTestCase", "TestCase07");
-
         logStatus("Start TestCase",
                 "Test Case 7: Verify that insufficient balance error is thrown when the wallet balance is not enough",
                 "DONE");
 
         Register registration = new Register(driver);
         registration.navigateToRegisterPage();
-        status = registration.registerUser(lastGeneratedUserName, "abc@123", true);
+        status = registration.registerUser("testUser", "abc@123", true);
         if (!status) {
             logStatus("Step Failure", "User Perform Registration Failed", status ? "PASS" : "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase07");
-
             logStatus("End TestCase",
                     "Test Case 7: Verify that insufficient balance error is thrown when the wallet balance is not enough: ",
                     status ? "PASS" : "FAIL");
@@ -511,8 +416,6 @@ public class QkartSanity {
         status = login.PerformLogin(lastGeneratedUserName, "abc@123");
         if (!status) {
             logStatus("Step Failure", "User Perform Login Failed", status ? "PASS" : "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase07");
-
             logStatus("End TestCase",
                     "Test Case 7: Verify that insufficient balance error is thrown when the wallet balance is not enough: ",
                     status ? "PASS" : "FAIL");
@@ -541,295 +444,18 @@ public class QkartSanity {
         logStatus("End TestCase",
                 "Test Case 7: Verify that insufficient balance error is thrown when the wallet balance is not enough: ",
                 status ? "PASS" : "FAIL");
-                takeScreenshot(driver, "EndTestCase", "TestCase07");
-
 
         return status;
     }
 
-    public static Boolean TestCase08(RemoteWebDriver driver) throws InterruptedException {
-        Boolean status = false;
-
-
-        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION -
-
-        takeScreenshot(driver,"StartTestCase","TestCase08");
-        logStatus( "Start TestCase" , "TestCase 8: Verify that product added to cart is available when a new tab is opened","DONE");
-        Register registration = new Register(driver);
-        registration.navigateToRegisterPage();
-        status = registration.registerUser("testUser", "abc@123", true);
-        if (!status) {
-            logStatus("Test case Failure", "Verify that product added to cart is available when a new tab is opened", "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase08");
-        }
-        lastGeneratedUserName = registration.lastGeneratedUsername;
-
-        Login login = new Login(driver);
-        login.navigateToLoginPage();
-        status = login.PerformLogin(lastGeneratedUserName, "abc@123");
-        if (!status) {
-            logStatus("Step Failure", "User Perform Login Failed", status ? "PASS" : "FAIL");
-            takeScreenshot(driver, "TestCaseFailed", "TestCase08");
-
-            logStatus("End TestCase",
-                    "Test Case 8: Verify that product added to cart is available when a new tab is opened: ",
-                    status ? "PASS" : "FAIL");
-        }
-        Home homePage = new Home(driver);
-        homePage.navigateToHome();
-        status = homePage.searchForProduct("Yonex");
-        homePage.addProductToCart("YONEX Smash Badminton Racquet");
-
-        String currentURL=driver.getCurrentUrl();
-        driver.findElement(By.linkText("Privacy policy")).click();
-
-        Set<String> handles=driver.getWindowHandles();
-        driver.switchTo().window(handles.toArray(new String[handles.size()])[1]);
-
-        driver.get(currentURL);
-        Thread.sleep(3000);
-
-
-        List<String> expectedResult=Arrays.asList("YONEX Smash Badminton Racquet");
-        status=homePage.verifyCartContents(expectedResult);
-
-        driver.close();
-
-        driver.switchTo().window(handles.toArray(new String[handles.size()])[0]);      
-        takeScreenshot(driver, "EndTestCase", "TestCase08");
-  
-        return status;
-    }
-
-    public static Boolean TestCase9(RemoteWebDriver driver) throws InterruptedException {
-        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION -
-        Boolean status = false;       
-        takeScreenshot(driver,"StartTestCase","TestCase09");
-        Home homePage = new Home(driver);
-        homePage.navigateToHome();
-        Thread.sleep(2000);        
-
-        driver.findElement(By.linkText("Privacy policy")).click();
-        Thread.sleep(2000);
-
-        Set<String> handles = driver.getWindowHandles();
-        driver.switchTo().window(handles.toArray(new String[handles.size()])[1]);
-
-        Thread.sleep(2000);
-        System.out.println("Welcome on Privacy Policy");
-
-        if(driver.getCurrentUrl().equals("https://crio-qkart-frontend-qa.vercel.app/privacy-policy")){
-            status = true;
-        }else{
-            System.out.println("Not able to get on Privacy Page");
-            return false;
-        }
-
-        driver.close();
-        driver.switchTo().window(handles.toArray(new String[handles.size()])[0]);
-        Thread.sleep(2000);
-
-        System.out.println("******************************************************");
-
-        homePage.navigateToHome();
-
-        Thread.sleep(2000);        
-
-        driver.findElement(By.linkText("About us")).click();
-        Thread.sleep(2000);
-
-        Set<String> handles1 = driver.getWindowHandles();
-        driver.switchTo().window(handles1.toArray(new String[handles1.size()])[1]);
-
-        Thread.sleep(2000);
-        System.out.println("Welcome on About us");
-
-        if(driver.getCurrentUrl().equals("https://crio-qkart-frontend-qa.vercel.app/aboutus")){
-            status = true;
-        }else{
-            System.out.println("Not able to get on About us Page");
-            return false;
-        }
-
-        driver.close();
-        driver.switchTo().window(handles.toArray(new String[handles.size()])[0]);
-        Thread.sleep(2000);
-
-        System.out.println("***************************************************************************");
-
-        homePage.navigateToHome();
-
-        Thread.sleep(2000);        
-
-        driver.findElement(By.linkText("Terms of Service")).click();
-        Thread.sleep(2000);
-
-        Set<String> handles2 = driver.getWindowHandles();
-        driver.switchTo().window(handles2.toArray(new String[handles2.size()])[1]);
-
-        Thread.sleep(2000);
-        System.out.println("Welcome on Terms of Service");
-
-        if(driver.getCurrentUrl().equals("https://crio-qkart-frontend-qa.vercel.app/terms-of-service")){
-            status = true;
-        }else{
-            System.out.println("Not able to get on Terms of Service Page");
-            return false;
-        }
-
-        driver.close();
-
-        driver.switchTo().window(handles.toArray(new String[handles.size()])[0]);
-
-        Thread.sleep(2000);
-
-        System.out.println("***************************************************************************");
-
-        logStatus("End TestCase",
-                "Test Case 10: Handle with multiple window: ",
-                status ? "PASS" : "FAIL");  
-                
-        // Go to the home page
-        homePage.navigateToHome();
-        Thread.sleep(3000);
-
-        // Log out the user
-        homePage.PerformLogout();
-
-        return status;
-
-    }
-    public static void switchToWindow(RemoteWebDriver driver, int tabIndex)
-    {
-    Set<String> handles= driver.getWindowHandles();
-    int i=0;
-    for(String window: handles){
-        if(i==tabIndex){
-            driver.switchTo().window(window);
-        }
-        i++;
-    }
-    }
-
-
-    public static Boolean TestCase10(RemoteWebDriver driver) throws InterruptedException {
-        Boolean status = false;
-        // takeScreenshot(driver,"StartTestCase","TestCase10");
-        try{
-        logStatus( "Start TestCase" , "TestCase 10: Verify Contact us","DONE");
-        Home homePage = new Home(driver);
-        homePage.navigateToHome();
-        
-        driver.findElement(By.xpath("//*[text()='Contact us']")).click();
-
-        WebElement name=driver.findElement(By.xpath("//*[@placeholder='Name']"));
-        name.sendKeys("crio user");
-
-        WebElement email=driver.findElement(By.xpath("//*[@placeholder='Email']"));
-        email.sendKeys("criouser@gmail.com");
-
-        WebElement message=driver.findElement(By.xpath("//*[@placeholder='Message']"));
-        message.sendKeys("Testing the contact us page");
-
-        WebElement contactUs=driver.findElement(By.xpath("//button[text()=' Contact Now']"));
-        contactUs.click();
-
-        WebDriverWait wait=new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.invisibilityOf(contactUs));
-        }
-        catch(Exception e){
-            return false;
-        }
-
-        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION -
-        takeScreenshot(driver, "EndTestCase", "TestCase10");
-
-        return true;
-    }
-
-    public static Boolean TestCase11(RemoteWebDriver driver) throws InterruptedException {
-        Boolean status = false;
-        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION -
-
-       // takeScreenshot(driver,"StartTestCase","TestCase11");
-        // TODO: CRIO_TASK_MODULE_SYNCHRONISATION -
-        logStatus( "Start TestCase" , "TestCase 11: To verify that Links in the Qkart advertisment are clickable","DONE");
-        Register registration = new Register(driver);
-        registration.navigateToRegisterPage();
-        status = registration.registerUser(lastGeneratedUserName, "abc@123", true);
-        if (!status) {
-            logStatus("Test case Failure", "To verify that Links in the Qkart advertisment are clickable", "FAIL");
-            takeScreenshot(driver,"TestcaseFailed","TestCase011");
-        }
-        lastGeneratedUserName = registration.lastGeneratedUsername;
-
-        Login login = new Login(driver);
-        login.navigateToLoginPage();
-        status = login.PerformLogin(lastGeneratedUserName, "abc@123");
-        if (!status) {
-            logStatus("Step Failure", "User Perform Login Failed", status ? "PASS" : "FAIL");
-            logStatus("End TestCase",
-                    "Test Case 9: To verify that Links in the Qkart advertisment are clickable: ",
-                    status ? "PASS" : "FAIL");
-        }
-        Home homePage = new Home(driver);
-        homePage.navigateToHome();
-        status = homePage.searchForProduct("Yonex");
-        homePage.addProductToCart("YONEX Smash Badminton Racquet");
-        homePage.clickCheckout();
-
-        Checkout checkoutPage = new Checkout(driver);
-        checkoutPage.addNewAddress("Addr line 1 addr Line 2 addr line 3");
-        checkoutPage.selectAddress("Addr line 1 addr Line 2 addr line 3");
-
-        // Place the order
-        checkoutPage.placeOrder();
-        WebDriverWait wait=new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.urlContains("/thanks"));
-
-        String thanksURL=driver.getCurrentUrl();
-        List<WebElement> Advertisements= driver.findElements(By.xpath("//iframe"));
-
-        status =Advertisements.size() ==3;
-        logStatus("Step", "sverify that Links in the Qkart advertisment are clickable", status ? "PASS" : "FAIL");
-
-        WebElement Advertisement1=driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div/iframe[1]"));
-        driver.switchTo().frame(Advertisement1);
-
-        driver.findElement(By.xpath("//button[text()='Buy Now']")).click();
-        
-
-        status= !driver.getCurrentUrl().equals(thanksURL);
-        logStatus("Step", "verify that Links in the Qkart advertisment are clickable", status ? "PASS" : "FAIL");
-
-        driver.switchTo().parentFrame();
-        driver.get(thanksURL);
-        // driver.navigate().back();
-        // Thread.sleep();
-
-        WebElement Advertisement2=driver.findElement(By.xpath("//iframe[2]"));
-        driver.switchTo().frame(Advertisement2);
-
-        driver.findElement(By.xpath("//button[text()='Buy Now']")).click();
-        driver.switchTo().parentFrame();
-
-        status= !driver.getCurrentUrl().equals(thanksURL);
-        logStatus("Step", "verify that Links in the Qkart advertisment are clickable", status ? "PASS" : "FAIL");
-
-
-        logStatus("End TestCase",
-                "Test Case 11: verify that Links in the Qkart advertisment are clickable: ",
-                status ? "PASS" : "FAIL");
-                takeScreenshot(driver,"EndTestCase","TestCase11");
-        return status;
-    }
 
     public static void main(String[] args) throws InterruptedException, MalformedURLException {
+        RemoteWebDriver driver = createDriver();
+
         int totalTests = 0;
         int passedTests = 0;
         Boolean status;
         // Maximize and Implicit Wait for things to initailize
-        RemoteWebDriver driver = createDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
@@ -843,7 +469,7 @@ public class QkartSanity {
 
             System.out.println("");
 
-            // // Execute Test Case 2
+        // //     // Execute Test Case 2
             totalTests += 1;
             status = TestCase02(driver);
             if (status) {
@@ -851,8 +477,7 @@ public class QkartSanity {
             }
 
             System.out.println("");
-
-            // Execute Test Case 3
+            //Execute Test Case 3
             totalTests += 1;
             status = TestCase03(driver);
             if (status) {
@@ -861,25 +486,25 @@ public class QkartSanity {
 
             System.out.println("");
 
-            // // // Execute Test Case 4
+        // //    // Execute Test Case 4
             totalTests += 1;
             status = TestCase04(driver);
             if (status) {
             passedTests += 1;
             }
 
-            System.out.println("");
+             System.out.println("");
 
-            // // // Execute Test Case 5
+        // //     // Execute Test Case 5
             totalTests += 1;
             status = TestCase05(driver);
             if (status) {
             passedTests += 1;
             }
 
-            System.out.println("");
+             System.out.println("");
 
-            // // // // Execute Test Case 6
+            // Execute Test Case 6
             totalTests += 1;
             status = TestCase06(driver);
             if (status) {
@@ -888,7 +513,7 @@ public class QkartSanity {
 
             System.out.println("");
 
-            // // // Execute Test Case 7
+            // Execute Test Case 7
             totalTests += 1;
             status = TestCase07(driver);
             if (status) {
@@ -898,46 +523,11 @@ public class QkartSanity {
             System.out.println("");
 
 
-            // // // Execute Test Case 8
-            totalTests += 1;
-            status = TestCase08(driver);
-            if (status) {
-            passedTests += 1;
-            }
-
-            System.out.println("");
-
-            // // // Execute Test Case 9
-            totalTests += 1;
-            status = TestCase9(driver);
-            if (status) {
-            passedTests += 1;
-            }
-
-            System.out.println("");
-
-            // // Execute Test Case 10
-            totalTests += 1;
-            status = TestCase10(driver);
-            if (status) {
-            passedTests += 1;
-            }
-
-            System.out.println("");
-
-            // // Execute Test Case 11
-            totalTests += 1;
-            status = TestCase11(driver);
-            if (status) {
-            passedTests += 1;
-            }
-
-            System.out.println("");
         } catch (Exception e) {
             throw e;
         } finally {
             // quit Chrome Driver
-           // driver.quit();
+            driver.quit();
 
             System.out.println(String.format("%s out of %s test cases Passed ", Integer.toString(passedTests),
                     Integer.toString(totalTests)));
