@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TestNG Parameters Suite">
+        
+   <test name="Params">
+   <groups>
+   <run>
+   <include name = "Sanity"></include>
+   <include name = "Regression"></include>
+   </run>
+   </groups>
+   <parameter name="username" value="testUser" />
+   <parameter name="password" value="abc@123" />
+   <parameter name="YONEX" value="YONEX Smash Badminton Racquet" />
+   <parameter name="Tan" value="Tan Leatherette Weekender Duffle" />
+    <parameter name="Xtend" value="Xtend Smart Watch" />
+    <parameter name="Yarine" value="Yarine Floor Lamp" />
+    <parameter name="Stylecon" value="Stylecon 9 Seater RHS Sofa Set" />
+   <parameter name="Quantity" value="60" />
+        <classes>
+            <class name="QKART_TESTNG.QKART_Tests" ></class>
+        </classes>
+    </test> 
+</suite>
